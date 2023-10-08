@@ -1,15 +1,16 @@
-#[macro_use]
-extern crate diesel;
-
-use actix_web::{web, App, HttpServer};
-
+mod actions;
 mod endpoints;
 mod models;
 mod schema;
 
+#[macro_use]
+extern crate diesel;
+
+use crate::endpoints::config_endpoints;
 use crate::endpoints::python_endpoints;
 use crate::endpoints::test_endpoints;
-use crate::models::*;
+use actix_web::{web, App, HttpServer};
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -17,6 +18,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(
                 web::scope("config")
+                    .service(config_endpoints::add_event_handler)
+                    .service(config_endpoints::add_event_handler)
                     .app_data(web::Data::new(test_endpoints::HelloFromState {
                         greeter_name: String::from("config"),
                     }))
