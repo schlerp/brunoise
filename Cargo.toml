@@ -1,0 +1,12 @@
+[package]
+name = "brunoise"
+version = "0.1.0"
+edition = "2021"
+authors = ["Patty C <schlerp@proton.me>"]
+description = "A configurable event server, written in rust, scripted in python."
+readme = "README.md"
+repository = "https://github.com/schlerp/brunoise/"
+
+[dependencies]
+pyembed = "0.24"
+actix-web = "4"
