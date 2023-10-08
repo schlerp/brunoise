@@ -1,8 +1,15 @@
+#[macro_use]
+extern crate diesel;
+
 use actix_web::{web, App, HttpServer};
 
 mod endpoints;
+mod models;
+mod schema;
+
 use crate::endpoints::python_endpoints;
 use crate::endpoints::test_endpoints;
+use crate::models::*;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
