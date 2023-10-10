@@ -1,0 +1,22 @@
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v3
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        components: rustfmt, clippy
+    - name: Install pyoxidiser
+      run: pip install pyoxidizer
+    - name: Initialise pyoxidiser
+      run: make init
+    - uses: pre-commit/action@v3.0.0
