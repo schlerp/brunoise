@@ -5,15 +5,26 @@ mod schema;
 
 #[macro_use]
 extern crate diesel;
+extern crate env_logger;
+extern crate log;
+
+use actix_web::{web, App, HttpServer};
+use env_logger::Env;
+use log::info;
 
 use crate::endpoints::config_endpoints;
 use crate::endpoints::python_endpoints;
 use crate::endpoints::test_endpoints;
-use actix_web::{web, App, HttpServer};
-
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let env = Env::default()
+        .filter_or("LOG_LEVEL", "info")
+        .write_style_or("LOG_STYLE", "auto");
+
+    env_logger::init_from_env(env);
+
+    info!("Starting http server on `http:localhost:8080`...");
     HttpServer::new(|| {
         App::new()
             .service(

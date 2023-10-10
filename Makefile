@@ -10,7 +10,7 @@ init:
 	pyoxidizer generate-python-embedding-artifacts pyembedded
 
 dev:
-	PYO3_CONFIG_FILE=${ROOT_DIR}/pyembedded/pyo3-build-config-file.txt cargo run
+	LOG_LEVEL=debug PYO3_CONFIG_FILE=${ROOT_DIR}/pyembedded/pyo3-build-config-file.txt cargo run
 
 test:
 	PYO3_CONFIG_FILE=${ROOT_DIR}/pyembedded/pyo3-build-config-file.txt cargo test
